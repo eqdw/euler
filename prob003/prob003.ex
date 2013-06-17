@@ -44,12 +44,12 @@ defmodule Prob003 do
     factors
   end
 
-  # if divisor is nil, that means we trial-divided num and failed
+  # if rem(num, divisor) != 0, that means we trial-divided num and failed
   # to find divisor as a divisor. We need a new divsior
   # this entails finding what the next prime is, saving it to
   # primes (to find more primes later), and passing it as
   # the next divisor
-  def factorize(num, primes, nil, factors) do
+  def factorize(num, primes, divisor, factors) when rem(num, divisor) != 0 do
     next_prime = find_next_prime(primes)
     factorize(num, primes ++ [next_prime], next_prime, factors)
   end
@@ -57,9 +57,5 @@ defmodule Prob003 do
   # the divisor is a factor of num. Update num, update factors
   def factorize(num, primes, divisor, factors) when rem(num, divisor) == 0 do
       factorize( div(num, divisor), primes, divisor, [divisor | factors])
-  end
-  # divisor is not a factor of num. Find a new divisor
-  def factorize(num, primes, _, factors) do
-      factorize( num, primes, nil, factors)
   end
 end
