@@ -1,14 +1,6 @@
 def is_palindrome num
   numstr = num.to_s
-
-  i = 0
-  while i <= numstr.length
-    if numstr[i] != numstr[ -(i+1) ]
-      return false
-    end
-    i += 1
-  end
-  return true
+  return numstr == numstr.reverse
 end
 
 
